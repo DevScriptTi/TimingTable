@@ -1,18 +1,19 @@
 <?php
 
-use App\Http\Controllers\Api\Main\BracletController;
-use App\Http\Controllers\Api\Main\ChildrenController;
-use App\Http\Controllers\Api\Main\GurdiansController;
+use App\Http\Controllers\Api\Users\AdminsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
-    return $request->user();
+    return response()->json(["user" => $request->user()->load('key.keyable')], 200);
 });
 
-Route::middleware(['auth:sanctum'])->group(function(){
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::apiResource('admins', AdminsController::class);
+    Route::post('admins/{admin}/generate-key', [AdminsController::class, 'createKey']);
 
 });
+
 
 
 require __DIR__.'/auth.php';

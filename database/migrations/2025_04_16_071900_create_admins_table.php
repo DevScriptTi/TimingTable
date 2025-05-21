@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
             $table->string('username')->unique();
+            $table->string('name');
+            $table->string('last');
             $table->boolean('is_super')->default(false);
             $table->timestamps();
         });

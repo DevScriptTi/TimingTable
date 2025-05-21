@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('value')->unique();
             $table->enum('status', ['used', 'unused'])->default('unused');
+            $table->morphs('keyable');
             $table->timestamp('used_at')->nullable();
             $table->timestamp('expires_at')->nullable();
             $table->timestamps();

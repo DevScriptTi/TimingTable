@@ -41,6 +41,9 @@ return new class extends Migration
             $table->foreignId('module_id')->constrained('modules');
             $table->foreignId('teacher_id')->constrained('teachers');
         });
+        Schema::table('users', function (Blueprint $table) {
+            $table->foreignId('key_id')->constrained('keys');
+        });
     }
 
     /**

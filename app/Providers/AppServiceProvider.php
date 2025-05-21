@@ -2,10 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Api\Main\Braclet;
-use App\Models\Api\Main\Circle;
-use App\Models\Api\User\Admin;
-use App\Models\Api\User\Gurdian;
+use App\Models\Api\Users\Admin;
+use App\Models\Api\Users\Student;
+use App\Models\Api\Users\Teacher;
 use App\Models\User;
 use Illuminate\Auth\Notifications\ResetPassword;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -31,11 +30,10 @@ class AppServiceProvider extends ServiceProvider
         Sanctum::usePersonalAccessTokenModel(PersonalAccessToken::class);
 
         Relation::morphMap([
-            'admin' => Admin::class,
-            'gurdian' => Gurdian::class,
             'user' => User::class ,
-            'braclet' => Braclet::class,
-            'circle' => Circle::class
+            'admin' => Admin::class,
+            'student' => Student::class,
+            'teacher' => Teacher::class
         ]);
 
         ResetPassword::createUrlUsing(function (object $notifiable, string $token) {
