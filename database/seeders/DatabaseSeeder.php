@@ -10,9 +10,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $admin = Admin::create([
-            'username' => 'dev_script_FD',
-            'name' => 'Dev',
-            'last' => 'Script',
+            'username' => 'Admin_47856',
+            'name' => 'Admin',
+            'last' => 'Admin',
             'is_super' => true,
         ]);
         $key = $admin->key()->create(
