@@ -12,7 +12,7 @@ class Day extends Model
     protected $fillable = ['name', 'time_table_id'];
 
     protected $casts = [
-        'name' => DayEnum::class
+        'name' => 'string'
     ];
 
     public function timeTable(): BelongsTo
@@ -20,7 +20,7 @@ class Day extends Model
         return $this->belongsTo(TimeTable::class);
     }
 
-    public function sessions(): HasMany
+    public function lessens(): HasMany
     {
         return $this->hasMany(Lessen::class);
     }

@@ -3,8 +3,8 @@
 namespace App\Models\Api\Users;
 
 use App\Models\Api\Core\Baladiya;
+use App\Models\Api\Core\Key;
 use App\Models\Api\Main\Lessen;
-use App\Models\Api\Main\Session;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -16,7 +16,7 @@ class Teacher extends Model
         'name',
         'last',
         'date_of_birth',
-        'baladiyas_id'
+        'baladiya_id'
     ];
 
     public function baladiya(): BelongsTo
@@ -24,8 +24,13 @@ class Teacher extends Model
         return $this->belongsTo(Baladiya::class);
     }
 
-    public function sessions(): HasMany
+    public function lessons(): HasMany
     {
         return $this->hasMany(Lessen::class);
+    }
+
+    public function key()
+    {
+        return $this->morphOne(Key::class, 'keyable');
     }
 }

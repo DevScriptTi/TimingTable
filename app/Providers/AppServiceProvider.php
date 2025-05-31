@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Api\Main\Group;
+use App\Models\Api\Main\Section;
 use App\Models\Api\Users\Admin;
 use App\Models\Api\Users\Student;
 use App\Models\Api\Users\Teacher;
@@ -33,7 +35,9 @@ class AppServiceProvider extends ServiceProvider
             'user' => User::class ,
             'admin' => Admin::class,
             'student' => Student::class,
-            'teacher' => Teacher::class
+            'teacher' => Teacher::class,
+            'group' => Group::class,
+            'section' => Section::class,
         ]);
 
         ResetPassword::createUrlUsing(function (object $notifiable, string $token) {

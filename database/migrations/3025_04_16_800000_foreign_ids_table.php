@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('teachers', function (Blueprint $table) {
-            $table->foreignId('baladiyas_id')->constrained('baladiyas');
+            $table->foreignId('baladiya_id')->constrained('baladiyas');
         });
 
         Schema::table('students', function (Blueprint $table) {
@@ -40,9 +40,16 @@ return new class extends Migration
             $table->foreignId('day_id')->constrained('days');
             $table->foreignId('module_id')->constrained('modules');
             $table->foreignId('teacher_id')->constrained('teachers');
+            $table->foreignId('class_rome_id')->constrained('class_romes');
         });
         Schema::table('users', function (Blueprint $table) {
             $table->foreignId('key_id')->constrained('keys');
+        });
+        Schema::table('class_romes', function (Blueprint $table) {
+            $table->foreignId('department_id')->constrained('departments');
+        });
+        Schema::table('baladiyas', function (Blueprint $table) {
+            $table->foreignId('wilaya_id')->constrained('wilayas');
         });
     }
 

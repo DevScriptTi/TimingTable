@@ -3,6 +3,7 @@
 namespace App\Models\Api\Users;
 
 use App\Models\Api\Core\Baladiya;
+use App\Models\Api\Core\Key;
 use App\Models\Api\Main\Group;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -27,5 +28,10 @@ class Student extends Model
     public function group(): BelongsTo
     {
         return $this->belongsTo(Group::class);
+    }
+
+    public function key()
+    {
+        return $this->morphOne(Key::class, 'keyable');
     }
 }

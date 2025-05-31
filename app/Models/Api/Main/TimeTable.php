@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class TimeTable extends Model
 {
+    protected $fillable = ['timeable_id', 'timeable_type'];
+
     public function timeable(): MorphTo
     {
         return $this->morphTo();
@@ -17,4 +19,6 @@ class TimeTable extends Model
     {
         return $this->hasMany(Day::class);
     }
+
+    
 }

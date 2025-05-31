@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Baladiya extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name' , 'wilaya_id'];
 
     public function teachers(): HasMany
     {
@@ -19,5 +19,10 @@ class Baladiya extends Model
     public function students(): HasMany
     {
         return $this->hasMany(Student::class);
+    }
+
+    public function wilaya()
+    {
+        return $this->belongsTo(Wilaya::class);
     }
 }

@@ -14,4 +14,9 @@ class Department extends Model
     {
         return $this->hasMany(Year::class);
     }
+
+    public function classRomes(): HasMany
+    {
+        return $this->hasMany(ClassRome::class);
+    }
 }

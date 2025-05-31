@@ -3,6 +3,7 @@
 namespace App\Models\Api\Main;
 
 use App\Enums\SessionTypeEnum;
+use App\Models\Api\Core\ClassRome;
 use App\Models\Api\Core\Module;
 use App\Models\Api\Users\Teacher;
 use Illuminate\Database\Eloquent\Model;
@@ -16,11 +17,12 @@ class Lessen extends Model
         'type',
         'day_id',
         'module_id',
-        'teacher_id'
+        'teacher_id',
+        'class_rome_id'
     ];
 
     protected $casts = [
-        'type' => SessionTypeEnum::class
+        'type' => 'string',
     ];
 
     public function day(): BelongsTo
@@ -36,5 +38,10 @@ class Lessen extends Model
     public function teacher(): BelongsTo
     {
         return $this->belongsTo(Teacher::class);
+    }
+
+    public function classRome(): BelongsTo
+    {
+        return $this->belongsTo(ClassRome::class);
     }
 }

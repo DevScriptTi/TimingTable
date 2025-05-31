@@ -31,6 +31,8 @@ class JoinController extends Controller
                 403
             );
         }
+        $key->status = "used";
+        $key->save();
         $key->user()->create($request->only(['email', 'password']));
         return response()->json(["message" => "user registred succes"], 200);
     }

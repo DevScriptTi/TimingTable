@@ -26,13 +26,9 @@ class DatabaseSeeder extends Seeder
                 'password' => 'password',
             ]
         );
-        // $this->call([
-        //     AdminSeeder::class,
-        //     DepartmentSeeder::class,
-        //     YearSeeder::class,
-        //     SectionSeeder::class,
-        //     GroupSeeder::class,
-        //     StudentSeeder::class,
-        // ]);
+        $this->call([
+            Wilayas::class,
+            DepartmentSeeder::class,
+        ]);
     }
 }

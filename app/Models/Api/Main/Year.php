@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Year extends Model
 {
-    protected $fillable = ['year', 'name', 'department_id'];
+    protected $fillable = ['year', 'department_id'];
 
     public function sections(): HasMany
     {
