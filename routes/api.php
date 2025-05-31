@@ -26,7 +26,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
     Route::apiResource('groups', GroupsController::class);
     Route::get('groups/{group}/time-table', [GroupsController::class, 'timeTable']);
-    Route::get('groups/{group}/valid-classes', [GroupsController::class, 'validClasses']);
+    Route::post('groups/{group}/valid-classes', [GroupsController::class, 'validClasses']);
     Route::post('groups/{group}/reserve-class-rome', [GroupsController::class, 'reserveClassRome']);
     Route::get('group-days/{group}' , [GroupsController::class, 'days']);
     Route::get('group/student' , [GroupsController::class, 'students']);

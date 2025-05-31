@@ -58,41 +58,78 @@ class GroupsController extends Controller
     public function teacher()
     {
         $teacher = Teacher::find(Auth::user()->key->keyable_id);
-        $mon = Day::where('name', 'mon')->with(['lessens' => function ($query) use ($teacher) {
+        $mon = Day::where('name', 'mon')->whereHas('lessens', function ($query) use ($teacher) {
             $query->where('teacher_id', $teacher->id)
-                ->orderBy('start_time')
-                ->with(['classRome', 'module', 'teacher']);
-        }])->first();
-        $tues = Day::where('name', 'tues')->with(['lessens' => function ($query) use ($teacher) {
+                ->orderBy('start_time');
+        })->with([
+            'lessens' => [
+                'classRome',
+                'module',
+                'teacher'
+            ]
+        ])->first();
+
+        $tues = Day::where('name', 'tue')->whereHas('lessens', function ($query) use ($teacher) {
             $query->where('teacher_id', $teacher->id)
-                ->orderBy('start_time')
-                ->with(['classRome', 'module', 'teacher']);
-        }])->first();
-        $wed = Day::where('name', 'wed')->with(['lessens' => function ($query) use ($teacher) {
+                ->orderBy('start_time');
+        })->with([
+            'lessens' => [
+                'classRome',
+                'module',
+                'teacher'
+            ]
+        ])->first();
+
+        $wed = Day::where('name', 'wed')->whereHas('lessens', function ($query) use ($teacher) {
             $query->where('teacher_id', $teacher->id)
-                ->orderBy('start_time')
-                ->with(['classRome', 'module', 'teacher']);
-        }])->first();
-        $thu = Day::where('name', 'thu')->with(['lessens' => function ($query) use ($teacher) {
+                ->orderBy('start_time');
+        })->with([
+            'lessens' => [
+                'classRome',
+                'module',
+                'teacher'
+            ]
+        ])->first();
+        $thu = Day::where('name', 'thu')->whereHas('lessens', function ($query) use ($teacher) {
             $query->where('teacher_id', $teacher->id)
-                ->orderBy('start_time')
-                ->with(['classRome', 'module', 'teacher']);
-        }])->first();
-        $fri = Day::where('name', 'fri')->with(['lessens' => function ($query) use ($teacher) {
+                ->orderBy('start_time');
+        })->with([
+            'lessens' => [
+                'classRome',
+                'module',
+                'teacher'
+            ]
+        ])->first();
+        $fri = Day::where('name', 'fri')->whereHas('lessens', function ($query) use ($teacher) {
             $query->where('teacher_id', $teacher->id)
-                ->orderBy('start_time')
-                ->with(['classRome', 'module', 'teacher']);
-        }])->first();
-        $sat = Day::where('name', 'sat')->with(['lessens' => function ($query) use ($teacher) {
+                ->orderBy('start_time');
+        })->with([
+            'lessens' => [
+                'classRome',
+                'module',
+                'teacher'
+            ]
+        ])->first();
+        $sat = Day::where('name', 'sat')->whereHas('lessens', function ($query) use ($teacher) {
             $query->where('teacher_id', $teacher->id)
-                ->orderBy('start_time')
-                ->with(['classRome', 'module', 'teacher']);
-        }])->first();
-        $sun = Day::where('name', 'sun')->with(['lessens' => function ($query) use ($teacher) {
+                ->orderBy('start_time');
+        })->with([
+            'lessens' => [
+                'classRome',
+                'module',
+                'teacher'
+            ]
+        ])->first();
+        $sun = Day::where('name', 'sun')->whereHas('lessens', function ($query) use ($teacher) {
             $query->where('teacher_id', $teacher->id)
-                ->orderBy('start_time')
-                ->with(['classRome', 'module', 'teacher']);
-        }])->first();
+                ->orderBy('start_time');
+        })->with([
+            'lessens' => [
+                'classRome',
+                'module',
+                'teacher'
+            ]
+        ])->first();
         return response()->json([
             'lessons' => [
                 'mon' => $mon,
@@ -128,7 +165,6 @@ class GroupsController extends Controller
 
         $validClasses = [];
         foreach ($classRomes as $classRome) {
-
             if (!$classRome->isBusy($request->start_time, $request->end_time, $request->day)) {
                 $validClasses[] = $classRome;
             }
