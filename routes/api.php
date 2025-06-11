@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Core\DepartmentsController;
 use App\Http\Controllers\Api\Main\GroupsController;
 use App\Http\Controllers\Api\Main\SectionsController;
 use App\Http\Controllers\Api\Users\AdminsController;
@@ -42,6 +43,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('days/{section}' , [SectionsController::class, 'days']);
     Route::get('teachersAll' , [SectionsController::class, 'teachers']);
     Route::get('modulesAll' , [SectionsController::class, 'modules']);
+
+    Route::get('allDepartments', [DepartmentsController::class, 'allDepartments']);
 });
 
 

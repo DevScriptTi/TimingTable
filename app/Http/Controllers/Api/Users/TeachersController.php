@@ -14,7 +14,7 @@ class TeachersController extends Controller
      */
     public function index(Request $request)
     {
-        $teachers = Teacher::with(['key.user' , 'baladiya.wilaya'])
+        $teachers = Teacher::with(['key.user', 'baladiya.wilaya'])
             ->when($request->has('username'), function ($query) use ($request) {
                 $query->where('username', 'like', '%' . $request->username . '%');
             })
@@ -27,10 +27,10 @@ class TeachersController extends Controller
     public function timeTable(Teacher $teacher)
     {
         $timeTable = TimeTable::with(['days' => [
-            'lessens' => function($query) use ($teacher) {
+            'lessens' => function ($query) use ($teacher) {
                 $query->where('teacher_id', $teacher->id)
-                      ->orderBy('start_time')
-                      ->with(['classRome', 'module']);
+                    ->orderBy('start_time')
+                    ->with(['classRome', 'module']);
             }
         ]])->get();
         return response()->json($timeTable);
@@ -43,7 +43,6 @@ class TeachersController extends Controller
             'name' => 'required|string',
             'last' => 'required|string',
             'date_of_birth' => 'required|date',
-            'baladiyas_id' => 'required|exists:baladiyas,id',
         ]);
 
 
@@ -51,6 +50,8 @@ class TeachersController extends Controller
             'username' => $validated['name'] . '_' . $validated['last'] . '_' . str()->random(6),
             'name' => $validated['name'],
             'last' => $validated['last'],
+            'date_of_birth' => $validated['date_of_birth'],
+            'baladiya_id' => 1, // Default baladiya ID, you can change this as needed
         ]);
 
         return response()->json([
@@ -92,10 +93,14 @@ class TeachersController extends Controller
             'name' => 'required|string',
             'last' => 'required|string',
             'date_of_birth' => 'required|date',
-            'baladiyas_id' => 'required|exists:baladiyas,id',
         ]);
         $validated['username'] = $validated['name'] . '_' . $validated['last'] . '_' . str()->random(6);
-        $teacher->update($validated);
+        $teacher->update([
+            "username" => $validated['username'],
+            'name' => $validated['name'],
+            'last' => $validated['last'],
+            'date_of_birth' => $validated['date_of_birth'],
+        ]);
         return response()->json([
             'message' => 'Teacher updated successfully',
             'teacher' => $teacher->load('key.user')
